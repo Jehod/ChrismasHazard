@@ -1,9 +1,9 @@
 # Default ignored files
 /shelf/
-/workspace.xml
+/.idea/workspace.xml
 
 #Output file for directory distribution
-/Resultats
+Resultats/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
