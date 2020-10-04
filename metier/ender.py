@@ -2,7 +2,7 @@ import os
 import shutil
 
 
-def generate(results):
+def generate(results=None):
     """
     methode pour generer une arbo de dossier pour sortir les noms cachés
     :param results:
