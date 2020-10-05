@@ -4,7 +4,7 @@ Outil pour mixer une liste de participants et attribuer a chacun un autre partic
 Pour faire des noels mysteres ou des murder party.
 
 Version Actuelle:
-la saisie des participants se fait par input.
+la saisie des participants se fait par input ou par Csv
 
 Chaque participant peut avoir une exclusion ( un participant qu'il ne pourra recevoir)
 
@@ -14,4 +14,5 @@ fichier.txt lui donne son association
 A venir:
 liste d'entrée en csv.  
 envoi des resultats directement par mail  
+Packaging en EXE
 IHM
