@@ -2,6 +2,7 @@ import os
 import csv
 
 from entity.participant import Participant
+from file_reader import constants
 
 csv_name = "Participants.csv"
 
@@ -28,6 +29,7 @@ def read() -> dict:
                 return {}
             participants[name] = part
 
-        participants.pop("Nom")
+        if constants.hdr_name in participants:
+            participants.pop(constants.hdr_name)
 
     return participants

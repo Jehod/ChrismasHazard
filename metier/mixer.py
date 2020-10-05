@@ -25,6 +25,10 @@ def mix(participants: dict) -> dict:
     :param participants:
     :return: les couples
     """
+
+    if not participants:
+        return {}
+
     complete = False
     couples = None
     count = 20

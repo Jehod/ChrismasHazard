@@ -30,3 +30,4 @@ def generate(results=None):
     print("Fin")
     print(f"Dans le dossier {first_dir}, chaque participant trouvera un dossier à son nom avec un fichier "
           "ou est inscrit la personne qui lui est associé")
+

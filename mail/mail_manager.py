@@ -3,7 +3,12 @@ from email.message import EmailMessage
 from mail import mail_constant
 
 
-def send_mail(target):
+def mailing(result: dict, participants):
+    for parts in result:
+        send_mail(participants[parts].mail, parts, result[parts])
+
+
+def send_mail(candidate_mail, candidate, target):
     print("Sending mail")
     user = mail_constant.user
     password = mail_constant.password
@@ -20,13 +25,13 @@ def send_mail(target):
     server.login(user, password)
     # (235, '2.7.0 Authentication successful') # Réponse du serveur
 
-    toaddrs = target  # On peut mettre autant d'adresses que l'on souhaite separe d'une virgule
+    toaddrs = candidate_mail  # On peut mettre autant d'adresses que l'on souhaite separe d'une virgule
 
     msg = EmailMessage()
     msg['Subject'] = mail_constant.SUBJECT
     msg['From'] = mail_constant.FROM
     msg['To'] = toaddrs
-    msg.set_content(mail_constant.CONTENT)
+    msg.set_content("Bonjour " + candidate + mail_constant.CONTENT + target)
     try:
         server.send_message(msg=msg)
     except smtplib.SMTPException as e:

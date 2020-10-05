@@ -38,3 +38,17 @@ def manual_entry():
             print(par.__str__())
             nbr_participants = nbr_participants - 1
     return participants
+
+def opening():
+    print(" *********** Bienvenue dans le ChrismasHazard ***************")
+    print("")
+    ok = False
+    mode = '1'
+    while not ok:
+        mode = input("Voulez-vous entrer les participants manuellement (1) ou avez-vous une liste en csv(2) ?  1 ou 2")
+        if mode == '1' or mode == '2':
+            ok = True
+        else:
+            print("!!!  veuillez repondre par 1 (saisie manuelle)  ou 2 (liste en csv)")
+
+    return mode
