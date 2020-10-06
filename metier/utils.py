@@ -11,5 +11,5 @@ def to_string(dico):
     el: participant
 
     for el in dico:
-        ts = ts + dico[el].__str__() + " // "
+        ts = ts + dico[el].__str__() + " \r\n "
     return ts

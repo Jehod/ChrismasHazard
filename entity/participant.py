@@ -7,13 +7,13 @@ class Participant:
         self.mail = mail
 
     def __str__(self) -> str:
-        desc = f"Participant: {self.name}.   "
+        desc = f"Participant: {self.name}. "
         if not self.exclusion:
-            excl = "Il n'exlut personne.    "
+            excl = "Il n'exlut personne. "
         else:
-            excl = f"Il ne peut être associé à : {self.exclusion}.    "
+            excl = f"Il ne peut être associé à : {self.exclusion}. "
         mel = ""
         if self.mail:
-            mel = f"Son mail est: {self.mail}.    "
+            mel = f"Son mail est: {self.mail}."
 
         return desc + excl + mel

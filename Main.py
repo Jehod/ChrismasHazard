@@ -1,3 +1,5 @@
+from asyncio import constants
+
 from IHM import cmd_windows
 from IHM.cmd_windows import opening
 from file_reader.csv_manager import read
@@ -13,7 +15,7 @@ def incorporate(mode) -> dict:
     :return: la liste des participants avec les eventuelles exclusions associées
     """
     if mode == '2':
-        participants = read()
+        participants = read(constants.csv_name)
     else:
         participants = cmd_windows.manual_entry()
 
@@ -36,7 +38,7 @@ if __name__ == "__main__":
     mode_op = opening()
     all_participants = incorporate(mode_op)
     result = mix(all_participants)
-    communicate(result, all_participants, True)
+    communicate(result, all_participants, False)
 
     print("")
     print("Merci d'avoir participé.")
