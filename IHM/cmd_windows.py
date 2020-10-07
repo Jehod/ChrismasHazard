@@ -39,7 +39,12 @@ def manual_entry():
             nbr_participants = nbr_participants - 1
     return participants
 
+
 def opening():
+    """
+    serie de message d'entree et de choix primaire
+    :return:
+    """
     print(" *********** Bienvenue dans le ChrismasHazard ***************")
     print("")
     ok = False

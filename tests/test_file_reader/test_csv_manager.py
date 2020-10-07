@@ -48,6 +48,12 @@ class Test(TestCase):
         result = read(resource_test_path + "csv_test_malformed2.csv")
         self.assertEqual(excepted, result)
 
+    def test_read_already_added(self):
+        excepted = {}
+        result = read(resource_test_path + "csv_test_doublon.csv")
+        self.assertEqual(excepted, result)
+
+
     def test_check_mail_format_ok(self):
         mail = "toto@toto.com"
         ok = 'ko'
@@ -58,6 +64,7 @@ class Test(TestCase):
             ok = 'ko'
 
         self.assertEqual('ok', ok)
+
 
     def test_check_mail_format_ko(self):
         mails = ["toto", "toto.toto", "toto@toto", "toto.com","@toto.com","to@to.", "toto@.com"]
