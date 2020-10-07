@@ -1,10 +1,12 @@
 from unittest import TestCase
 
 from entity.participant import Participant
-from file_reader.csv_manager import read
+from exception.custom_exception import CustomException
+from file_reader.csv_manager import read, check_mail_format
 from metier.utils import to_string
+from tests import test_constants
 
-resource_test_path = "..\\resource_test\\"
+resource_test_path = test_constants.RESOURCE_TEST_PATH
 
 dumb_list = {"toto": Participant("toto", "tutu", "dumbo@gmail.com"),
              "tutu": Participant("tutu", "titi", "dumbo@gmail.com"),
@@ -40,3 +42,34 @@ class Test(TestCase):
         excepted = {}
         result = read(resource_test_path + "csv_test_no_head.csv")
         self.assertEqual(excepted, result)
+
+    def test_read_malformed_2(self):
+        excepted = {}
+        result = read(resource_test_path + "csv_test_malformed2.csv")
+        self.assertEqual(excepted, result)
+
+    def test_check_mail_format_ok(self):
+        mail = "toto@toto.com"
+        ok = 'ko'
+        try:
+            check_mail_format(mail)
+            ok = 'ok'
+        except CustomException as ex:
+            ok = 'ko'
+
+        self.assertEqual('ok', ok)
+
+    def test_check_mail_format_ko(self):
+        mails = ["toto", "toto.toto", "toto@toto", "toto.com","@toto.com","to@to.", "toto@.com"]
+
+        for mail in mails:
+            ok = 'ko'
+            try:
+                check_mail_format(mail)
+                ok = 'ok'
+            except CustomException as ex:
+                print(ex)
+                ok = 'ko'
+
+            self.assertRaises(CustomException)
+            self.assertEqual('ko', ok)

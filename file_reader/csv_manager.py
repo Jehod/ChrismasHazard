@@ -1,5 +1,6 @@
 import os
 import csv
+import re
 
 from entity.participant import Participant
 from exception.custom_exception import CustomException
@@ -19,9 +20,20 @@ def check_format(all_parts):
     if first.count(',') < 3:
         raise CustomException("delimiter ")
 
-    if first[0] != constants.hdr_name or first[1] != constants.hdr_exclusion or first[2] != constants.hdr_mail:
+    if first[0] != constants.HEADER_NAME or first[1] != constants.HEADER_EXCLUSION or first[2] != constants.HEADER_MAIL:
         raise CustomException(
-            f"le csv doit avoir comme en-tete {constants.hdr_name} {constants.hdr_exclusion} {constants.hdr_mail}")
+            f"le csv doit avoir comme en-tete {constants.HEADER_NAME} {constants.HEADER_EXCLUSION} {constants.HEADER_MAIL}")
+
+
+def check_mail_format(mail):
+    """
+    test le format simple d'un mail
+    :param mail:
+    :raise: CustomException
+    """
+    mail_format = "[^@]+@[^@]+\.[^@]+"
+    if not re.match(mail_format, mail):
+        raise CustomException(f"l'adresse mail {mail} n'est pas dans un format valide")
 
 
 def check_conformity(row):
@@ -36,6 +48,8 @@ def check_conformity(row):
         raise CustomException("Une case de la 1er colonne est vide")
     if len(row) != 3:
         raise CustomException("le nombre de colonnes attendu pour chaque ligne est de 3")
+    if row[2]:
+        check_mail_format(row[2])
 
 
 def check_conformity_header(row):
@@ -44,10 +58,13 @@ def check_conformity_header(row):
     :param row:
     :raise: customException
     """
+    if not row:
+        raise CustomException("Une ligne d en tete est manquante.")
 
-    if row[0] != constants.hdr_name or row[1] != constants.hdr_exclusion or row[2] != constants.hdr_mail:
-        raise CustomException(f"le format d en tete attendu est: {constants.hdr_name}, {constants.hdr_exclusion},"
-                              f" {constants.hdr_mail}")
+    if len(row) != 3 or row[0] != constants.HEADER_NAME or row[1] != constants.HEADER_EXCLUSION or row[
+        2] != constants.HEADER_MAIL:
+        raise CustomException(f"le format d en tete attendu est: {constants.HEADER_NAME}, {constants.HEADER_EXCLUSION},"
+                              f" {constants.HEADER_MAIL}")
 
 
 def read(csv_name) -> dict:
@@ -66,9 +83,11 @@ def read(csv_name) -> dict:
             all_parts = csv.reader(csv_file, delimiter=',')
 
             for row in all_parts:
-                check_conformity(row)
+
                 if not participants:
                     check_conformity_header(row)
+                else:
+                    check_conformity(row)
 
                 name = row[0]
 
@@ -79,8 +98,8 @@ def read(csv_name) -> dict:
 
                 participants[name] = part
 
-            if constants.hdr_name in participants:
-                participants.pop(constants.hdr_name)
+            if constants.HEADER_NAME in participants:
+                participants.pop(constants.HEADER_NAME)
     except CustomException as ex:
         print(ex)
         return {}
