@@ -1,7 +1,7 @@
 from asyncio import constants
 
-from IHM import cmd_windows
-from IHM.cmd_windows import opening
+from cmd import cmd_windows
+from cmd.cmd_windows import opening
 from file_reader.csv_manager import read
 from mail.mail_manager import mailing
 from metier.ender import generate
