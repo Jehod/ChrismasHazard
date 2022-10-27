@@ -1,7 +1,6 @@
-from asyncio import constants
-
 from cmd import cmd_windows
 from cmd.cmd_windows import opening
+from constants import misc
 from file_reader.csv_manager import read
 from mail.mail_manager import mailing
 from metier.ender import generate
@@ -15,7 +14,7 @@ def incorporate(mode) -> dict:
     :return: la liste des participants avec les eventuelles exclusions associées
     """
     if mode == '2':
-        participants = read(constants.csv_name)
+        participants = read(misc.CSV_NAME)
     else:
         participants = cmd_windows.manual_entry()
 
@@ -32,13 +31,11 @@ def communicate(result, participants, mail):
 
 
 if __name__ == "__main__":
-    result = None
-    all_participants = None
 
     mode_op = opening()
     all_participants = incorporate(mode_op)
     result = mix(all_participants)
-    communicate(result, all_participants, False)
+    communicate(result, all_participants, True)
 
     print("")
     print("Merci d'avoir participé.")

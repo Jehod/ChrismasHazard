@@ -13,6 +13,9 @@ def send_mail(candidate_mail, candidate, target):
     user = mail_constant.user
     password = mail_constant.password
 
+    if user is None or password is None:
+        print('User or password is missing')
+
     server = smtplib.SMTP(host="smtp-relay.gmail.com", port=587)  # Avec TLS, on utilise SMTP()
     # server.set_debuglevel(1)  # Décommenter pour activer le debug
     server.connect('smtp.gmail.com', 587)  # On indique le port TLS
@@ -37,6 +40,7 @@ def send_mail(candidate_mail, candidate, target):
     except smtplib.SMTPException as e:
         print(e)
     # {} # Réponse du serveur
-    server.quit()
+    finally:
+        server.quit()
     # (221 2.0.0 closing connection e13sm9566633wre.60 - gsmtp)
     print("mailing finish")

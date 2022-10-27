@@ -16,6 +16,9 @@ def verify(couples, participants):
             return False
         elif couples[giver] == participants[giver].exclusion:
             return False
+    if (couples['Michel'] == 'Jean-paul') or (couples['Jean-paul'] == 'Michel'):
+        print("bip")
+        return False
 
     return True
 

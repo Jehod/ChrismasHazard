@@ -48,9 +48,9 @@ def opening():
     """
     print(" *********** Bienvenue dans le ChrismasHazard ***************")
     print("")
-    root_window = RootWindow()
+    """root_window = RootWindow()
     root_window.run()
-
+"""
     ok = False
     mode = '1'
     while not ok:
