@@ -1,6 +1,7 @@
 import smtplib
 from email.message import EmailMessage
 from mail import mail_constant
+from mail.mail_constant import ENDING_MAIL
 
 
 def mailing(result: dict, participants):
@@ -34,7 +35,7 @@ def send_mail(candidate_mail, candidate, target):
     msg['Subject'] = mail_constant.SUBJECT
     msg['From'] = mail_constant.FROM
     msg['To'] = toaddrs
-    msg.set_content("Bonjour " + candidate + mail_constant.CONTENT + target)
+    msg.set_content("Bonjour " + candidate + mail_constant.CONTENT + target + ENDING_MAIL)
     try:
         server.send_message(msg=msg)
     except smtplib.SMTPException as e:
