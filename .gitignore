@@ -8,6 +8,7 @@ Participants.csv
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
+*/__pycache__/*
 *.cpython-37.pyc
 */*.cpython-37.pyc
 *.py[cod]
